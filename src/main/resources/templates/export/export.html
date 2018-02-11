@@ -1,14 +1,48 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="utf-8"/>
     <title>util</title>
     <meta name="description" content="undefined"/>
     <meta name="author" content="undefined"/>
     <meta name="handheldfriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0 "/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0 "/>
     <meta http-equiv="cleartype" content="on"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery.fileDownload/1.4.2/jquery.fileDownload.min.js"></script>
 </head>
 <body>
+<select id="export_type_select">
+    <option>请选择</option>
+    <option value="Excel">Excel</option>
+    <option value="Csv">CSV</option>
+    <option value="Pdf">PDF</option>
+</select>
+<button  onclick="export_data(this);">导  出</button>
 </body>
+
+<script>
+function export_data(self){
+    if($("#export_type_select").val() != null){
+        $(self).attr("disabled","true");
+        $.fileDownload('/export/exportData', {
+            data:{
+                type:$("#export_type_select").val()
+            },
+            successCallback:function(data){
+                $(self).removeAttr("disabled");
+            },
+            failCallback:function(data){
+                $(self).removeAttr("disabled");
+                alert("导出出错，请联系管理员！");
+                console.log(data)
+            }
+        })
+    }else {
+        alert("请选择导出报表类型！");
+    }
+}
+
+</script>
 </html>
