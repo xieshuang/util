@@ -2,7 +2,7 @@ package com.xsh.util.controller;
 
 import com.xsh.util.entity.FinanceExportBean;
 import com.xsh.util.export.ExportCsvUtil;
-import javassist.expr.NewArray;
+import com.xsh.util.export.ExportExcelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping(path = "export")
@@ -47,8 +49,8 @@ public class ExportController {
         }
         try {
             if(type.equals("Excel")){
-//                ExportExcelUtil<FinanceExportBean> util = new ExportExcelUtil<FinanceExportBean>();
-//                util.export(sheetName, headers, columns, list, response);
+                ExportExcelUtil<FinanceExportBean> util = new ExportExcelUtil<FinanceExportBean>();
+                util.export(sheetName, headers, columns, list, response);
             } else if(type.equals("Csv")){
                 ExportCsvUtil<FinanceExportBean> util = new ExportCsvUtil<FinanceExportBean>();
                 util.export(sheetName, headers, columns, list, response);
