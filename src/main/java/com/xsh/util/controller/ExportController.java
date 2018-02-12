@@ -3,6 +3,7 @@ package com.xsh.util.controller;
 import com.xsh.util.entity.FinanceExportBean;
 import com.xsh.util.export.ExportCsvUtil;
 import com.xsh.util.export.ExportExcelUtil;
+import com.xsh.util.export.ExportPdfUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -56,8 +57,8 @@ public class ExportController {
                 util.export(sheetName, headers, columns, list, response);
             } else {
                 //PDF
-//                ExportPdfUtil<FinanceExportBean> util = new ExportPdfUtil<FinanceExportBean>();
-//                util.export(sheetName, headers, columns, list, response);
+                ExportPdfUtil<FinanceExportBean> util = new ExportPdfUtil<FinanceExportBean>();
+                util.export(sheetName, headers, columns, list, response);
             }
         } catch (Exception e) {
             log.error("财务流水导出出错：", e);
